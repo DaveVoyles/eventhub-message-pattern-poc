@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>OneWeek_Eventing.StreamingWithResend.Provider.Redis</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OneWeek-Eventing.Common.Providers.Redis\OneWeek-Eventing.Common.Providers.Redis.csproj" />
+    <ProjectReference Include="..\OneWeek-Eventing.StreamingWithResend.Interfaces\OneWeek-Eventing.StreamingWithResend.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>

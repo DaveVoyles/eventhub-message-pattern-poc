@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>OneWeek_Eventing.CompetingConsumer.Interfaces</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OneWeek-Eventing.CompetingConsumer.Entities\OneWeek-Eventing.CompetingConsumer.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

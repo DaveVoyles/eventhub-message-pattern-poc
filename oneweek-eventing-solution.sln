@@ -1,0 +1,103 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "competing-consumer-with-ordering", "competing-consumer-with-ordering", "{AF0871DD-F9CD-4C0C-BC67-90FCE20BEAA0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneWeek-Eventing.CompetingConsumer.Entities", "OneWeek-Eventing.CompetingConsumer.Entities\OneWeek-Eventing.CompetingConsumer.Entities.csproj", "{43ED7ABC-94A2-4842-B545-648D099668FB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneWeek-Eventing.CompetingConsumer.Interfaces", "OneWeek-Eventing.CompetingConsumer.Interfaces\OneWeek-Eventing.CompetingConsumer.Interfaces.csproj", "{8BD7B06A-5D1D-4C70-AD82-F28A5DE102F4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneWeek-Eventing.CompetingConsumer.Web", "OneWeek-Eventing.CompetingConsumer.Web\OneWeek-Eventing.CompetingConsumer.Web.csproj", "{D08C16C6-BA7D-4310-8AD5-2F9167BA9592}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneWeek-Eventing.CompetingConsumer.Provider.Redis", "OneWeek-Eventing.CompetingConsumer.Provider.Redis\OneWeek-Eventing.CompetingConsumer.Provider.Redis.csproj", "{F578CEEA-A605-4348-8877-49AEF4AC1BDB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "streaming-with-resend", "streaming-with-resend", "{20A833A7-3A7C-442A-8B6D-C024A0ACABD1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneWeek-Eventing.StreamingWithResend.Entities", "OneWeek-Eventing.StreamingWithResend.Entities\OneWeek-Eventing.StreamingWithResend.Entities.csproj", "{B6B5C5DE-BA85-4899-8A4F-5DD8862DFA37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneWeek-Eventing.StreamingWithResend.Interfaces", "OneWeek-Eventing.StreamingWithResend.Interfaces\OneWeek-Eventing.StreamingWithResend.Interfaces.csproj", "{F83221BB-9300-430A-BA11-3ADF581A93C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneWeek-Eventing.StreamingWithResend.Provider.Redis", "OneWeek-Eventing.StreamingWithResend.Provider.Redis\OneWeek-Eventing.StreamingWithResend.Provider.Redis.csproj", "{45AAC213-50F8-46B6-B6F1-B71E73EC0FA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneWeek-Eventing.StreamingWithResend.Web", "OneWeek-Eventing.StreamingWithResend.Web\OneWeek-Eventing.StreamingWithResend.Web.csproj", "{3C0EDA9B-2238-4650-9877-35BC0D74086B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{E69458B9-D4E9-4D6B-93D7-A041CB5E2EC6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Providers", "Providers", "{43D34CC0-A4CF-4FC6-9A53-A19895AB5015}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Redis", "Redis", "{1E92EC45-31BC-468E-A24C-76D336983593}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneWeek-Eventing.Common.Providers.Redis", "OneWeek-Eventing.Common.Providers.Redis\OneWeek-Eventing.Common.Providers.Redis.csproj", "{90BF2FBF-DE08-4FCB-9856-23D3185F9F42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneWeek-Eventing.Common", "OneWeek-Eventing.Common\OneWeek-Eventing.Common.csproj", "{7AB8DA73-1C68-4701-89B5-EC0CB777836F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43ED7ABC-94A2-4842-B545-648D099668FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43ED7ABC-94A2-4842-B545-648D099668FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43ED7ABC-94A2-4842-B545-648D099668FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43ED7ABC-94A2-4842-B545-648D099668FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BD7B06A-5D1D-4C70-AD82-F28A5DE102F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BD7B06A-5D1D-4C70-AD82-F28A5DE102F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BD7B06A-5D1D-4C70-AD82-F28A5DE102F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BD7B06A-5D1D-4C70-AD82-F28A5DE102F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D08C16C6-BA7D-4310-8AD5-2F9167BA9592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D08C16C6-BA7D-4310-8AD5-2F9167BA9592}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D08C16C6-BA7D-4310-8AD5-2F9167BA9592}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D08C16C6-BA7D-4310-8AD5-2F9167BA9592}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F578CEEA-A605-4348-8877-49AEF4AC1BDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F578CEEA-A605-4348-8877-49AEF4AC1BDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F578CEEA-A605-4348-8877-49AEF4AC1BDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F578CEEA-A605-4348-8877-49AEF4AC1BDB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6B5C5DE-BA85-4899-8A4F-5DD8862DFA37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6B5C5DE-BA85-4899-8A4F-5DD8862DFA37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6B5C5DE-BA85-4899-8A4F-5DD8862DFA37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6B5C5DE-BA85-4899-8A4F-5DD8862DFA37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F83221BB-9300-430A-BA11-3ADF581A93C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F83221BB-9300-430A-BA11-3ADF581A93C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F83221BB-9300-430A-BA11-3ADF581A93C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F83221BB-9300-430A-BA11-3ADF581A93C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45AAC213-50F8-46B6-B6F1-B71E73EC0FA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45AAC213-50F8-46B6-B6F1-B71E73EC0FA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45AAC213-50F8-46B6-B6F1-B71E73EC0FA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45AAC213-50F8-46B6-B6F1-B71E73EC0FA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C0EDA9B-2238-4650-9877-35BC0D74086B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C0EDA9B-2238-4650-9877-35BC0D74086B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C0EDA9B-2238-4650-9877-35BC0D74086B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C0EDA9B-2238-4650-9877-35BC0D74086B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90BF2FBF-DE08-4FCB-9856-23D3185F9F42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90BF2FBF-DE08-4FCB-9856-23D3185F9F42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90BF2FBF-DE08-4FCB-9856-23D3185F9F42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90BF2FBF-DE08-4FCB-9856-23D3185F9F42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AB8DA73-1C68-4701-89B5-EC0CB777836F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AB8DA73-1C68-4701-89B5-EC0CB777836F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AB8DA73-1C68-4701-89B5-EC0CB777836F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AB8DA73-1C68-4701-89B5-EC0CB777836F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{43ED7ABC-94A2-4842-B545-648D099668FB} = {AF0871DD-F9CD-4C0C-BC67-90FCE20BEAA0}
+		{8BD7B06A-5D1D-4C70-AD82-F28A5DE102F4} = {AF0871DD-F9CD-4C0C-BC67-90FCE20BEAA0}
+		{D08C16C6-BA7D-4310-8AD5-2F9167BA9592} = {AF0871DD-F9CD-4C0C-BC67-90FCE20BEAA0}
+		{F578CEEA-A605-4348-8877-49AEF4AC1BDB} = {AF0871DD-F9CD-4C0C-BC67-90FCE20BEAA0}
+		{B6B5C5DE-BA85-4899-8A4F-5DD8862DFA37} = {20A833A7-3A7C-442A-8B6D-C024A0ACABD1}
+		{F83221BB-9300-430A-BA11-3ADF581A93C5} = {20A833A7-3A7C-442A-8B6D-C024A0ACABD1}
+		{45AAC213-50F8-46B6-B6F1-B71E73EC0FA1} = {20A833A7-3A7C-442A-8B6D-C024A0ACABD1}
+		{3C0EDA9B-2238-4650-9877-35BC0D74086B} = {20A833A7-3A7C-442A-8B6D-C024A0ACABD1}
+		{43D34CC0-A4CF-4FC6-9A53-A19895AB5015} = {E69458B9-D4E9-4D6B-93D7-A041CB5E2EC6}
+		{1E92EC45-31BC-468E-A24C-76D336983593} = {43D34CC0-A4CF-4FC6-9A53-A19895AB5015}
+		{90BF2FBF-DE08-4FCB-9856-23D3185F9F42} = {1E92EC45-31BC-468E-A24C-76D336983593}
+		{7AB8DA73-1C68-4701-89B5-EC0CB777836F} = {E69458B9-D4E9-4D6B-93D7-A041CB5E2EC6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B226E7C7-0EFD-4DD7-BE42-A053559EB656}
+	EndGlobalSection
+EndGlobal

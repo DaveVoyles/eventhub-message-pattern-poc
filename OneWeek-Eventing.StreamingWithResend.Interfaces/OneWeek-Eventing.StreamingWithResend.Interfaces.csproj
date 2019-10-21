@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>OneWeek_Eventing.StreamingWithResend.Interfaces</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OneWeek-Eventing.StreamingWithResend.Entities\OneWeek-Eventing.StreamingWithResend.Entities.csproj" />
+  </ItemGroup>
+
+</Project>
