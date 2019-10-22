@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OneWeek_Eventing.Common;
 using OneWeek_Eventing.CompetingConsumer.Entities;
 using System;
 using System.Collections.Generic;

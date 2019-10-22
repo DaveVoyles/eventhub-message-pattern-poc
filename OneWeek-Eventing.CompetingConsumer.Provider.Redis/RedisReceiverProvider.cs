@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using OneWeek_Eventing.Common;
 using OneWeek_Eventing.Common.Providers.Redis;
 using OneWeek_Eventing.CompetingConsumer.Entities;
 using OneWeek_Eventing.CompetingConsumer.Interfaces;

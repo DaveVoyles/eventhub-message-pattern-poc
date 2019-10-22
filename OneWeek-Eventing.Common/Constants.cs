@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace OneWeek_Eventing.CompetingConsumer.Entities
+namespace OneWeek_Eventing.Common
 {
     public static class Constants
     {
