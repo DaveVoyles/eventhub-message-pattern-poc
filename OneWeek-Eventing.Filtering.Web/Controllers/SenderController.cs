@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using OneWeek_Eventing.Common;
-using OneWeek_Eventing.StreamingWithResend.Entities;
-using OneWeek_Eventing.StreamingWithResend.Interfaces;
-using OneWeek_Eventing.StreamingWithResend.Web.Workers;
+using OneWeek_Eventing.Filtering.Entities;
+using OneWeek_Eventing.Filtering.Interfaces;
+using OneWeek_Eventing.Filtering.Web.Workers;
 
-namespace OneWeek_Eventing.StreamingWithResend.Web.Controllers
+namespace OneWeek_Eventing.Filtering.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -19,7 +18,6 @@ namespace OneWeek_Eventing.StreamingWithResend.Web.Controllers
     {
         private readonly ISenderProvider _senderProvider;
         private static SenderWorker _lastSenderWorker = null;
-        private static CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
 
         public SenderController(ISenderProvider senderProvider)
         {
@@ -43,19 +41,19 @@ namespace OneWeek_Eventing.StreamingWithResend.Web.Controllers
 
         // POST api/sender
         [HttpPost]
-        public void Post([FromQuery]string updatesFile, [FromQuery]int? delayBetweenUpdates)
+        public void Post([FromQuery]string ordersFile, [FromQuery]int? delayBetweenOrders)
         {
             Delete();
 
             // retrieve all the parameters
-            if (string.IsNullOrEmpty(updatesFile))
-                updatesFile = Constants.UpdatesFile; // revert back to the default one
-            var updates = JsonConvert.DeserializeObject<IEnumerable<Update>>(System.IO.File.ReadAllText(updatesFile));
+            if (string.IsNullOrEmpty(ordersFile))
+                ordersFile = Constants.TradesFile; // revert back to the default one
+            var orders = JsonConvert.DeserializeObject<IEnumerable<Order>>(System.IO.File.ReadAllText(ordersFile));
 
-            if (updates != null)
+            if (orders != null)
             {
                 _lastSenderWorker = new SenderWorker(_senderProvider);
-                _ = _lastSenderWorker.RunAsync(updates, delayBetweenUpdates ?? 0, 0);
+                _ = _lastSenderWorker.RunAsync(orders, delayBetweenOrders ?? 0, 0);
             }
         }
 
@@ -66,9 +64,13 @@ namespace OneWeek_Eventing.StreamingWithResend.Web.Controllers
             if (_lastSenderWorker != null)
             {
                 var status = _lastSenderWorker.GetStatus();
-                if (status.State != WorkerState.Stopped)
+                if (status.State == WorkerState.Stopped)
                 {
-                    _cancellationTokenSource.Cancel();
+                    _lastSenderWorker = null;
+                }
+                else
+                {
+                    /* TODO; fail with worker already in progress */
                 }
                 _lastSenderWorker = null;
             }

@@ -1,27 +1,26 @@
 ﻿using OneWeek_Eventing.Common;
-using OneWeek_Eventing.StreamingWithResend.Entities;
-using OneWeek_Eventing.StreamingWithResend.Interfaces;
+using OneWeek_Eventing.Filtering.Entities;
+using OneWeek_Eventing.Filtering.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
-namespace OneWeek_Eventing.StreamingWithResend.Web.Workers
+namespace OneWeek_Eventing.Filtering.Web.Workers
 {
     public struct SenderStatus
     {
         public WorkerState State;
-        public int UpdatesSent;
-        public double UpdatesSentPerSecond;
+        public int OrdersSent;
+        public double OrdersSentPerSecond;
     }
 
     public class SenderWorker : WorkerBase
     {
         private readonly ISenderProvider _senderProvider;
 
-        private int _updatesSent = 0;
-        private double _updatesSentPerSecond = 0.0;
+        private int _ordersSent = 0;
+        private double _ordersSentPerSecond = 0.0;
         private readonly int ReportInterval = 1000;
 
         public SenderWorker(ISenderProvider senderProvider)
@@ -29,7 +28,7 @@ namespace OneWeek_Eventing.StreamingWithResend.Web.Workers
             _senderProvider = senderProvider;
         }
 
-        public async Task RunAsync(IEnumerable<Update> updates, int delayBetweenUpdates = 0, int updatesPerSecond = 0 /* TODO */)
+        public async Task RunAsync(IEnumerable<Order> orders, int delayBetweenOrders = 0, int ordersPerSecond = 0 /* TODO */)
         {
             if (_senderProvider == null)
                 throw new NullReferenceException("No concrete sender provider supplied.");
@@ -41,37 +40,34 @@ namespace OneWeek_Eventing.StreamingWithResend.Web.Workers
             }
 
             DateTime startReportInterval = DateTime.UtcNow;
-            int newUpdatesSent = _updatesSent;
+            int newOrdersSent = _ordersSent;
             int sequenceNumber = 0;
 
-            foreach (var update in updates)
+            foreach (var order in orders)
             {
-                update.SequenceNumber = sequenceNumber++;
-                update.PriceDate = DateTime.UtcNow;
-                await _senderProvider.SendMessageAsync(update);
-
+                order.SequenceNumber = sequenceNumber++;
+                order.OrderDate = DateTime.UtcNow;
+                await _senderProvider.SendMessageAsync(order);
                 lock (this)
-                    newUpdatesSent++;
-
-                if (delayBetweenUpdates > 0)
-                    await Task.Delay(delayBetweenUpdates);
+                    newOrdersSent++;
+                if (delayBetweenOrders > 0)
+                    await Task.Delay(delayBetweenOrders);
 
                 if (DateTime.UtcNow > (startReportInterval + TimeSpan.FromMilliseconds(ReportInterval)))
                 {
                     lock (this)
                     {
-                        _updatesSentPerSecond = ((double)(newUpdatesSent - _updatesSent) / (DateTime.UtcNow - startReportInterval).TotalSeconds);
-                        _updatesSent = newUpdatesSent;
+                        _ordersSentPerSecond = ((double)(newOrdersSent - _ordersSent) / (DateTime.UtcNow - startReportInterval).TotalSeconds);
+                        _ordersSent = newOrdersSent;
                     }
 
                     startReportInterval = DateTime.UtcNow;
                 }
             }
-
             lock (this)
             {
-                _updatesSentPerSecond = ((double)(newUpdatesSent - _updatesSent) / (DateTime.UtcNow - startReportInterval).TotalSeconds);
-                _updatesSent = newUpdatesSent;
+                _ordersSentPerSecond = ((double)(newOrdersSent - _ordersSent) / (DateTime.UtcNow - startReportInterval).TotalSeconds);
+                _ordersSent = newOrdersSent;
             }
 
             await _senderProvider.Stop();
@@ -88,8 +84,8 @@ namespace OneWeek_Eventing.StreamingWithResend.Web.Workers
                 return new SenderStatus()
                 {
                     State = State,
-                    UpdatesSent = _updatesSent,
-                    UpdatesSentPerSecond = _updatesSentPerSecond
+                    OrdersSent = _ordersSent,
+                    OrdersSentPerSecond = _ordersSentPerSecond
                 };
             }
         }

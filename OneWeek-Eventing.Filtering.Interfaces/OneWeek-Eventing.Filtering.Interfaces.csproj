@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>OneWeek_Eventing.Filtering.Interfaces</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OneWeek-Eventing.Filtering.Entities\OneWeek-Eventing.Filtering.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OneWeek_Eventing.StreamingWithResend.Entities
 {
-    public class Latest
+    public class Update
     {
         public int SequenceNumber { get; set; }
         public string Instrument { get; set; }

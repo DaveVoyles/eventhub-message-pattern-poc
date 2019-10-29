@@ -1,16 +1,16 @@
-﻿using OneWeek_Eventing.StreamingWithResend.Entities;
+﻿using OneWeek_Eventing.Filtering.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OneWeek_Eventing.StreamingWithResend.Interfaces
+namespace OneWeek_Eventing.Filtering.Interfaces
 {
     public interface ISenderProvider
     {
         Task Start();
         Task Stop();
 
-        Task SendMessageAsync(Update latest);
+        Task SendMessageAsync(Order order);
     }
 }

@@ -15,6 +15,15 @@ namespace OneWeek_Eventing.Common
             "TELE2"
         };
 
+        public static readonly string[] Markets =
+        {
+            "SFB",
+            "Nasdaq",
+            "NYSE"
+        };
+
         public static readonly string TradesFile = "default.trades";
+        public static readonly string OrdersFile = "default.orders";
+        public static readonly string UpdatesFile = "default.updates";
     }
 }

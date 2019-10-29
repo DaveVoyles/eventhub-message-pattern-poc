@@ -15,10 +15,10 @@ namespace OneWeek_Eventing.StreamingWithResend.Provider.Redis
     {
         private ConnectionMultiplexer _redis;
         private int _latestSequenceNumber = 0;
-        private List<Latest> _queuedMessages = new List<Latest>();
+        private List<Update> _queuedMessages = new List<Update>();
         private List<Tuple<int, int>> _resendRequests = new List<Tuple<int, int>>();
 
-        public event EventHandler<Latest> OnLatestReceived;
+        public event EventHandler<Update> OnLatestReceived;
 
         public Task Start()
         {
@@ -41,7 +41,7 @@ namespace OneWeek_Eventing.StreamingWithResend.Provider.Redis
         {
             lock (this)
             {
-                var latest = JsonConvert.DeserializeObject<Latest>(value);
+                var latest = JsonConvert.DeserializeObject<Update>(value);
                 var expectedSeqenceNumber = _latestSequenceNumber + 1;
 
                 if (latest.SequenceNumber > expectedSeqenceNumber)

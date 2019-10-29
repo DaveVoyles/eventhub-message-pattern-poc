@@ -29,7 +29,7 @@ namespace OneWeek_Eventing.StreamingWithResend.Web.Workers
             _receiverProvider.OnLatestReceived += OnLatestReceived;
         }
 
-        private void OnLatestReceived(object sender, Latest latest)
+        private void OnLatestReceived(object sender, Update latest)
         {
             lock (this)
             {

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <RootNamespace>OneWeek_Eventing.Common.Providers.Redis</RootNamespace>
+    <UserSecretsId>e73402d4-b0ce-4863-9bd7-ae5789142bcd</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

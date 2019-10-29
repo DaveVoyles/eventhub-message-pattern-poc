@@ -13,7 +13,7 @@ namespace OneWeek_Eventing.StreamingWithResend.Provider.Redis
     {
         private ConnectionMultiplexer _redis;
         private int _latestSequenceNumber = 0;
-        private List<Latest> _listSentMessages = new List<Latest>();
+        private List<Update> _listSentMessages = new List<Update>();
 
         public Task Start()
         {
@@ -33,7 +33,7 @@ namespace OneWeek_Eventing.StreamingWithResend.Provider.Redis
             return Task.CompletedTask;
         }
 
-        public async Task SendMessageAsync(Latest latest)
+        public async Task SendMessageAsync(Update latest)
         {
             lock (this)
             {

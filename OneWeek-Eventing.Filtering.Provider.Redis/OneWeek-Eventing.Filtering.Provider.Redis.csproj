@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>OneWeek_Eventing.Filtering.Provider.Redis</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="RedisReceiverProvider.cs~RF60824a8.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OneWeek-Eventing.Common.Providers.Redis\OneWeek-Eventing.Common.Providers.Redis.csproj" />
+    <ProjectReference Include="..\OneWeek-Eventing.CompetingConsumer.Entities\OneWeek-Eventing.CompetingConsumer.Entities.csproj" />
+    <ProjectReference Include="..\OneWeek-Eventing.Filtering.Interfaces\OneWeek-Eventing.Filtering.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>
