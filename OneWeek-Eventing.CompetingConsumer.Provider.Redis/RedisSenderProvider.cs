@@ -11,12 +11,14 @@ namespace OneWeek_Eventing.CompetingConsumer.Provider.Redis
     public class RedisSenderProvider : ISenderProvider
     {
         private string _instrument;
+        private int _partitionCount;
         private ConnectionMultiplexer _redis;
 
         // ""
-        public Task Start(string instrument = null)
+        public Task Start(string instrument = null, int partitionCount = -1)
         {
             _instrument = instrument;
+            _partitionCount = partitionCount;
 
             _redis = ConnectionMultiplexer.Connect(RedisConfiguration.GetConnectionString());
             return Task.CompletedTask;
@@ -32,6 +34,8 @@ namespace OneWeek_Eventing.CompetingConsumer.Provider.Redis
                 await subscriber.PublishAsync($"Trades-{trade.Instrument}", tradeAsJson);
                 if (String.IsNullOrEmpty(_instrument))
                     await subscriber.PublishAsync("Trades-*", tradeAsJson);
+                else if (_partitionCount != -1)
+                    await subscriber.PublishAsync($"Trades-{trade.GetPartitionIndex(_partitionCount)}", tradeAsJson);
             }
         }
 

@@ -38,7 +38,7 @@ namespace OneWeek_Eventing.CompetingConsumer.Web.Controllers
 
         // POST api/sender
         [HttpPost]
-        public void Post([FromQuery]string tradesFile, [FromQuery]string instrument, [FromQuery]int? delayBetweenTrades)
+        public void Post([FromQuery]string tradesFile, [FromQuery]string instrument, [FromQuery]int?partitionCount, [FromQuery]int? delayBetweenTrades)
         {
             Delete();
 
@@ -50,7 +50,7 @@ namespace OneWeek_Eventing.CompetingConsumer.Web.Controllers
             if (trades != null)
             {
                 _lastSenderWorker = new SenderWorker(_senderProvider);
-                _ = _lastSenderWorker.RunAsync(trades, instrument, delayBetweenTrades ?? 0, 0);
+                _ = _lastSenderWorker.RunAsync(trades, instrument, partitionCount, delayBetweenTrades ?? 0, 0);
             }
         }
 

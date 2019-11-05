@@ -27,12 +27,12 @@ namespace OneWeek_Eventing.CompetingConsumer.Web.Workers
             _senderProvider = senderProvider;
         }
 
-        public async Task RunAsync(IEnumerable<Trade> trades, string instrument = null, int delayBetweenTrades = 0, int tradesPerSecond = 0 /* TODO */)
+        public async Task RunAsync(IEnumerable<Trade> trades, string instrument = null, int? partitionCount = null, int delayBetweenTrades = 0, int tradesPerSecond = 0 /* TODO */)
         {
             if (_senderProvider == null)
                 throw new NullReferenceException("No concrete sender provider supplied.");
 
-            await _senderProvider.Start(instrument);
+            await _senderProvider.Start(instrument, partitionCount ?? -1);
             lock(this)
             {
                 State = WorkerState.Running;

@@ -19,7 +19,7 @@ namespace OneWeek_Eventing.CompetingConsumer.Provider.Redis
 
         public event EventHandler<Trade> OnTradeReceived;
         
-        public Task Start(string instrument, bool usePartitions, int partitionId = -1, int partitionCount = -1)
+        public Task Start(string instrument, bool usePartitions, int partitionIndex = -1, int partitionCount = -1)
         {
             _instrument = instrument;
 
@@ -31,7 +31,7 @@ namespace OneWeek_Eventing.CompetingConsumer.Provider.Redis
             {
                 if (usePartitions)
                 {
-                    if (partitionId == -1 && partitionCount == -1)
+                    if (partitionIndex == -1 && partitionCount == -1)
                     {
                         foreach (var instrumentPartition in Constants.Instruments)
                         {

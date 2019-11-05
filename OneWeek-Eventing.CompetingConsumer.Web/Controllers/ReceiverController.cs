@@ -39,12 +39,12 @@ namespace OneWeek_Eventing.CompetingConsumer.Web.Controllers
 
         // POST api/sender
         [HttpPost]
-        public void Post([FromQuery]string instrument, [FromQuery]bool usePartitions = true, [FromQuery]int partitionId = -1, [FromQuery]int partitionCount = -1)
+        public void Post([FromQuery]string instrument, [FromQuery]bool usePartitions = true, [FromQuery]int partitionIndex = -1, [FromQuery]int partitionCount = -1)
         {
             Delete();
 
             _lastReceiverWorker = new ReceiverWorker(_receiverProvider);
-            _ = _lastReceiverWorker.Start(instrument, usePartitions, partitionId, partitionCount);
+            _ = _lastReceiverWorker.Start(instrument, usePartitions, partitionIndex, partitionCount);
         }
 
         // DELETE api/receiver

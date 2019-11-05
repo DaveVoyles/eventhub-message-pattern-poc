@@ -57,9 +57,9 @@ namespace OneWeek_Eventing.CompetingConsumer.Web.Workers
             }
         }
 
-        public async Task Start(string instrument, bool usePartitions, int partitionId = -1, int partitionCount = -1)
+        public async Task Start(string instrument, bool usePartitions, int partitionIndex = -1, int partitionCount = -1)
         {
-            await _receiverProvider.Start(instrument, usePartitions, partitionId, partitionCount);
+            await _receiverProvider.Start(instrument, usePartitions, partitionIndex, partitionCount);
             State = WorkerState.Running;
         }
 

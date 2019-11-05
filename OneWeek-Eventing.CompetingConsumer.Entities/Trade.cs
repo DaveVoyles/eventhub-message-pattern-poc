@@ -12,5 +12,12 @@ namespace OneWeek_Eventing.CompetingConsumer.Entities
         public DateTime TradeDate { get; set; }
         public string Buyer { get; set; }
         public string Seller { get; set; }
+
+        public string GetPartitionKey() => Instrument;
+        public int GetPartitionIndex(int partitionCount)
+        {
+            int hashCode = GetPartitionKey().GetHashCode();
+            return (partitionCount > 0 ? hashCode % partitionCount : 0);
+        }
     }
 }

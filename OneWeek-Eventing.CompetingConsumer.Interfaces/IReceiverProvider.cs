@@ -8,7 +8,7 @@ namespace OneWeek_Eventing.CompetingConsumer.Interfaces
 {
     public interface IReceiverProvider
     {
-        Task Start(string instrument, bool usePartitions, int partitionId = -1, int partitionCount = -1);
+        Task Start(string instrument, bool usePartitions, int partitionIndex = -1, int partitionCount = -1);
         Task Stop();
 
         event EventHandler<Trade> OnTradeReceived;
