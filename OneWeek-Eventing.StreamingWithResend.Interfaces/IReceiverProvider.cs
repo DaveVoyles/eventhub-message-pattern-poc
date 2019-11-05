@@ -11,6 +11,6 @@ namespace OneWeek_Eventing.StreamingWithResend.Interfaces
         Task Start();
         Task Stop();
 
-        event EventHandler<Update> OnLatestReceived;
+        event EventHandler<Update> OnUpdateReceived;
     }
 }

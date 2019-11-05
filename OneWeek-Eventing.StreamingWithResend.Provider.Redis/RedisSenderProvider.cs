@@ -12,7 +12,7 @@ namespace OneWeek_Eventing.StreamingWithResend.Provider.Redis
     public class RedisSenderProvider : ISenderProvider
     {
         private ConnectionMultiplexer _redis;
-        private int _latestSequenceNumber = 0;
+        private int _updateSequenceNumber = 0;
         private List<Update> _listSentMessages = new List<Update>();
 
         public Task Start()
@@ -20,7 +20,7 @@ namespace OneWeek_Eventing.StreamingWithResend.Provider.Redis
             _redis = ConnectionMultiplexer.Connect(RedisConfiguration.GetConnectionString());
             var subscriber = _redis.GetSubscriber();
 
-            subscriber.Subscribe("ResendLatest-*", OnResendLatest);
+            subscriber.Subscribe("ResendUpdate-*", OnResendUpdate);
 
             return Task.CompletedTask;
         }
@@ -33,26 +33,26 @@ namespace OneWeek_Eventing.StreamingWithResend.Provider.Redis
             return Task.CompletedTask;
         }
 
-        public async Task SendMessageAsync(Update latest)
+        public async Task SendMessageAsync(Update update)
         {
             lock (this)
             {
-                int expectedSequenceNumber = _latestSequenceNumber + 1;
+                int expectedSequenceNumber = _updateSequenceNumber + 1;
 
                 // are we in sync?
-                if (latest.SequenceNumber != expectedSequenceNumber)
-                    throw new IndexOutOfRangeException($"Expected SequenceNumber {expectedSequenceNumber}, got {latest.SequenceNumber}.");
+                if (update.SequenceNumber != expectedSequenceNumber)
+                    throw new IndexOutOfRangeException($"Expected SequenceNumber {expectedSequenceNumber}, got {update.SequenceNumber}.");
 
-                _listSentMessages.Add(latest);
-                _latestSequenceNumber++;
+                _listSentMessages.Add(update);
+                _updateSequenceNumber++;
             }
             var subscriber = _redis.GetSubscriber();
-            var latestAsJson = JsonConvert.SerializeObject(latest);
+            var updateAsJson = JsonConvert.SerializeObject(update);
 
-            await subscriber.PublishAsync("Latest-*", latestAsJson);
+            await subscriber.PublishAsync("Update-*", updateAsJson);
         }
 
-        private void OnResendLatest(RedisChannel channel, RedisValue value)
+        private void OnResendUpdate(RedisChannel channel, RedisValue value)
         {
             var tokens = value.ToString().Split('-');
             var fromSequenceNumber = int.Parse(tokens[0]);
@@ -64,7 +64,7 @@ namespace OneWeek_Eventing.StreamingWithResend.Provider.Redis
             {
                 for (int index = fromSequenceNumber - 1; index < _listSentMessages.Count && index < toSequenceNumber; index++)
                 {
-                    subscriber.Publish("Latest-*", JsonConvert.SerializeObject(_listSentMessages[index]));
+                    subscriber.Publish("Update-*", JsonConvert.SerializeObject(_listSentMessages[index]));
                 }
             }
         }

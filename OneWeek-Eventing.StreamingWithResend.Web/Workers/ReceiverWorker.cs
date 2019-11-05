@@ -11,7 +11,7 @@ namespace OneWeek_Eventing.StreamingWithResend.Web.Workers
     public struct ReceiverStatus
     {
         public WorkerState State;
-        public int LatestReceived;
+        public int UpdateReceived;
         public double AverageLatency;
     }
 
@@ -19,29 +19,30 @@ namespace OneWeek_Eventing.StreamingWithResend.Web.Workers
     public class ReceiverWorker : WorkerBase
     {
         private IReceiverProvider _receiverProvider;
-        private int _latestReceived = 0;
+        private int _updatesReceived = 0;
         private double _aggregatedLatency = 0.0;
         private int _lastReceivedSequenceNumber = 0;
 
         public ReceiverWorker(IReceiverProvider receiverProvider)
         {
             _receiverProvider = receiverProvider;
-            _receiverProvider.OnLatestReceived += OnLatestReceived;
+            _receiverProvider.OnUpdateReceived += OnUpdateReceived;
         }
 
-        private void OnLatestReceived(object sender, Update latest)
+        private void OnUpdateReceived(object sender, Update update)
         {
             lock (this)
             {
                 if (State != WorkerState.Error)
                 {
-                    if ((_lastReceivedSequenceNumber + 1) < latest.SequenceNumber)
+                    if ((_lastReceivedSequenceNumber + 1) < update.SequenceNumber)
                         // misaligned!
                         State = WorkerState.Error;
                     else
                     { 
-                        _latestReceived++;
-                        _aggregatedLatency += (DateTime.UtcNow - latest.PriceDate).TotalMilliseconds;
+                        _updatesReceived++;
+                        _lastReceivedSequenceNumber = update.SequenceNumber;
+                        _aggregatedLatency += (DateTime.UtcNow - update.PriceDate).TotalMilliseconds;
                     }
                 }
             }
@@ -66,8 +67,8 @@ namespace OneWeek_Eventing.StreamingWithResend.Web.Workers
                 return new ReceiverStatus()
                 {
                     State = State,
-                    LatestReceived = _latestReceived,
-                    AverageLatency = _aggregatedLatency / (double)_latestReceived
+                    UpdateReceived = _updatesReceived,
+                    AverageLatency = _aggregatedLatency / (double)_updatesReceived
                 };
             }
         }

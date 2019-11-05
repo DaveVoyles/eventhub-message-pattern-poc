@@ -47,7 +47,7 @@ namespace OneWeek_Eventing.Filtering.Web.Controllers
 
             // retrieve all the parameters
             if (string.IsNullOrEmpty(ordersFile))
-                ordersFile = Constants.TradesFile; // revert back to the default one
+                ordersFile = Constants.OrdersFile; // revert back to the default one
             var orders = JsonConvert.DeserializeObject<IEnumerable<Order>>(System.IO.File.ReadAllText(ordersFile));
 
             if (orders != null)

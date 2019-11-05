@@ -11,6 +11,6 @@ namespace OneWeek_Eventing.StreamingWithResend.Interfaces
         Task Start();
         Task Stop();
 
-        Task SendMessageAsync(Update latest);
+        Task SendMessageAsync(Update update);
     }
 }

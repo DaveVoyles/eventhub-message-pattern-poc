@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using OneWeek_Eventing.StreamingWithResend.Interfaces;
+using OneWeek_Eventing.StreamingWithResend.Provider.Redis;
 
 namespace OneWeek_Eventing.StreamingWithResend.Web
 {
@@ -25,6 +27,8 @@ namespace OneWeek_Eventing.StreamingWithResend.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient(typeof(ISenderProvider), typeof(RedisSenderProvider));
+            services.AddTransient(typeof(IReceiverProvider), typeof(RedisReceiverProvider));
             services.AddControllers();
         }
 

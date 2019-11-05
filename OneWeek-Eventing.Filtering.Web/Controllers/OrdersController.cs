@@ -56,7 +56,7 @@ namespace OneWeek_Eventing.Filtering.Web.Controllers
 
             for (int i = 0; i < numberOfOrders; i++)
             {
-                var market = Constants.Markets[(int)((rand.NextDouble() * (double)maxInstrumentIndex) + 0.5)];
+                var market = Constants.Markets[(int)((rand.NextDouble() * (double)maxMarketIndex) + 0.5)];
                 var instrument = Constants.Instruments[(int)((rand.NextDouble() * (double)maxInstrumentIndex) + 0.5)];
                 listOrders.Add(new Order
                 {

@@ -22,6 +22,7 @@
     <ProjectReference Include="..\OneWeek-Eventing.Common\OneWeek-Eventing.Common.csproj" />
     <ProjectReference Include="..\OneWeek-Eventing.CompetingConsumer.Interfaces\OneWeek-Eventing.CompetingConsumer.Interfaces.csproj" />
     <ProjectReference Include="..\OneWeek-Eventing.StreamingWithResend.Interfaces\OneWeek-Eventing.StreamingWithResend.Interfaces.csproj" />
+    <ProjectReference Include="..\OneWeek-Eventing.StreamingWithResend.Provider.Redis\OneWeek-Eventing.StreamingWithResend.Provider.Redis.csproj" />
   </ItemGroup>
 
 </Project>

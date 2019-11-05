@@ -5,6 +5,7 @@ using OneWeek_Eventing.StreamingWithResend.Interfaces;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,18 +15,18 @@ namespace OneWeek_Eventing.StreamingWithResend.Provider.Redis
     public class RedisReceiverProvider : IReceiverProvider
     {
         private ConnectionMultiplexer _redis;
-        private int _latestSequenceNumber = 0;
+        private int _updateSequenceNumber = 0;
         private List<Update> _queuedMessages = new List<Update>();
         private List<Tuple<int, int>> _resendRequests = new List<Tuple<int, int>>();
 
-        public event EventHandler<Update> OnLatestReceived;
+        public event EventHandler<Update> OnUpdateReceived;
 
         public Task Start()
         {
             _redis = ConnectionMultiplexer.Connect(RedisConfiguration.GetConnectionString());
             var subscriber = _redis.GetSubscriber();
 
-            subscriber.Subscribe("Latest-*", OnLatest);
+            subscriber.Subscribe("Update-*", OnUpdate);
             return Task.CompletedTask;
         }
 
@@ -37,28 +38,28 @@ namespace OneWeek_Eventing.StreamingWithResend.Provider.Redis
             return Task.CompletedTask;
         }
 
-        private void OnLatest(RedisChannel channel, RedisValue value)
+        private void OnUpdate(RedisChannel channel, RedisValue value)
         {
             lock (this)
             {
-                var latest = JsonConvert.DeserializeObject<Update>(value);
-                var expectedSeqenceNumber = _latestSequenceNumber + 1;
+                var update = JsonConvert.DeserializeObject<Update>(value);
+                var expectedSequenceNumber = _updateSequenceNumber + 1;
 
-                if (latest.SequenceNumber > expectedSeqenceNumber)
+                if (update.SequenceNumber > expectedSequenceNumber)
                 {
                     int queueIndex = 0;
                     for (queueIndex = 0; queueIndex < _queuedMessages.Count; queueIndex++)
                     {
-                        if (latest.SequenceNumber < _queuedMessages[queueIndex].SequenceNumber)
+                        if (update.SequenceNumber < _queuedMessages[queueIndex].SequenceNumber)
                             break;
                     }
 
                     if (queueIndex < _queuedMessages.Count)
-                        _queuedMessages.Insert(queueIndex, latest);
+                        _queuedMessages.Insert(queueIndex, update);
                     else
-                        _queuedMessages.Add(latest);
+                        _queuedMessages.Add(update);
 
-                    var lowSequenceNumber = expectedSeqenceNumber;
+                    var lowSequenceNumber = expectedSequenceNumber;
                     var highSequenceNumber = _queuedMessages[0].SequenceNumber - 1;
                     foreach (var resendRequest in _resendRequests)
                     {
@@ -66,18 +67,18 @@ namespace OneWeek_Eventing.StreamingWithResend.Provider.Redis
                             return;
                     }
                     var subscriber = _redis.GetSubscriber();
-                    subscriber.Publish("ResendLatest-*", $"{lowSequenceNumber}-{highSequenceNumber}");
+                    subscriber.Publish("ResendUpdate-*", $"{lowSequenceNumber}-{highSequenceNumber}");
                     _resendRequests.Add(new Tuple<int, int>(lowSequenceNumber, highSequenceNumber));
                 }
                 else
                 {
-                    OnLatestReceived?.Invoke(this, latest);
-                    _latestSequenceNumber = latest.SequenceNumber;
+                    OnUpdateReceived?.Invoke(this, update);
+                    _updateSequenceNumber = update.SequenceNumber;
 
-                    while (_queuedMessages.Count > 0 && _queuedMessages[0].SequenceNumber == (_latestSequenceNumber + 1))
+                    while (_queuedMessages.Count > 0 && _queuedMessages[0].SequenceNumber == (_updateSequenceNumber + 1))
                     {
-                        OnLatestReceived?.Invoke(this, latest);
-                        _latestSequenceNumber = latest.SequenceNumber;
+                        OnUpdateReceived?.Invoke(this, _queuedMessages[0]);
+                        _updateSequenceNumber = _queuedMessages[0].SequenceNumber;
                         _queuedMessages.RemoveAt(0);
                     }
                 }

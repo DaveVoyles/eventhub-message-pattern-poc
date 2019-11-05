@@ -46,7 +46,7 @@ namespace OneWeek_Eventing.StreamingWithResend.Web.Workers
 
             foreach (var update in updates)
             {
-                update.SequenceNumber = sequenceNumber++;
+                update.SequenceNumber = ++sequenceNumber;
                 update.PriceDate = DateTime.UtcNow;
                 await _senderProvider.SendMessageAsync(update);
 
@@ -74,11 +74,13 @@ namespace OneWeek_Eventing.StreamingWithResend.Web.Workers
                 _updatesSent = newUpdatesSent;
             }
 
+            /*
             await _senderProvider.Stop();
             lock (this)
             {
                 State = WorkerState.Stopped;
             }
+            */
         }
 
         public SenderStatus GetStatus()
