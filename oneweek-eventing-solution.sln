@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneWeek-Eventing.Filtering.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneWeek_Eventing.CompetingConsumer.Provider.EventHub", "OneWeek_Eventing.CompetingConsumer.Provider.EventHub\OneWeek_Eventing.CompetingConsumer.Provider.EventHub.csproj", "{F86B77D0-CB4F-4844-8E5F-29CD10106320}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneWeek-Eventing.CompetingConsumer.Web", "OneWeek-Eventing.CompetingConsumer.Web\OneWeek-Eventing.CompetingConsumer.Web.csproj", "{624404AA-0CA3-4461-A5E8-A24A8DCFD1A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{F86B77D0-CB4F-4844-8E5F-29CD10106320}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F86B77D0-CB4F-4844-8E5F-29CD10106320}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F86B77D0-CB4F-4844-8E5F-29CD10106320}.Release|Any CPU.Build.0 = Release|Any CPU
+		{624404AA-0CA3-4461-A5E8-A24A8DCFD1A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{624404AA-0CA3-4461-A5E8-A24A8DCFD1A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{624404AA-0CA3-4461-A5E8-A24A8DCFD1A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{624404AA-0CA3-4461-A5E8-A24A8DCFD1A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -126,6 +132,7 @@ Global
 		{4BC34136-7284-48D4-B87B-0CDAB62665B7} = {00C23B15-39E9-47F2-B6A5-B46920463999}
 		{E9800358-4F73-4211-BA63-7500921941D6} = {00C23B15-39E9-47F2-B6A5-B46920463999}
 		{F86B77D0-CB4F-4844-8E5F-29CD10106320} = {AF0871DD-F9CD-4C0C-BC67-90FCE20BEAA0}
+		{624404AA-0CA3-4461-A5E8-A24A8DCFD1A4} = {AF0871DD-F9CD-4C0C-BC67-90FCE20BEAA0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B226E7C7-0EFD-4DD7-BE42-A053559EB656}
