@@ -10,10 +10,12 @@ namespace OneWeek_Eventing.CompetingConsumer.Provider.EventHub
 {
     public class EventHubSenderProvider : ISenderProvider
     {
+        // Event Hub connections
         private static EventHubClient eventHubClient;
         private const string EventHubConnectionString = "Endpoint=sb://dv-eventhub.servicebus.windows.net/;SharedAccessKeyName=manage-policy;SharedAccessKey=2Ryi+hFlavlPN3aEir0YsEEBhuCgtD7+kXnvvIs1VEw=;EntityPath=myeventhub";
         private const string EventHubName             = "myeventhub";
 
+        // Vars specific to the trade
         private string _instrument;
         private int    _partitionCount;
 
@@ -36,30 +38,19 @@ namespace OneWeek_Eventing.CompetingConsumer.Provider.EventHub
 
         public async Task SendMessageAsync(Trade trade)
         {
-            //if (String.IsNullOrEmpty(_instrument) || String.Compare(_instrument, trade.Instrument, false) == 0)
-            //{
-            //    var subscriber = _redis.GetSubscriber();
-            //    var tradeAsJson = JsonConvert.SerializeObject(trade);
-
-            //    await subscriber.PublishAsync($"Trades-{trade.Instrument}", tradeAsJson);
-            //    if (String.IsNullOrEmpty(_instrument))
-            //        await subscriber.PublishAsync("Trades-*", tradeAsJson);
-            //    else if (_partitionCount != -1)
-            //        await subscriber.PublishAsync($"Trades-{trade.GetPartitionIndex(_partitionCount)}", tradeAsJson);
-            //}
-
-
             if (String.IsNullOrEmpty(_instrument) || String.Compare(_instrument, trade.Instrument, false) == 0)
             {
+                // Convert the trade to JSON, then encode in a format Event Hub accepts
                 var tradeAsJson    = JsonConvert.SerializeObject(trade);
+                var encodedTrade   = Encoding.UTF8.GetBytes(tradeAsJson);
 
-                await eventHubClient.SendAsync(new EventData(Encoding.UTF8.GetBytes(tradeAsJson))); // TODO: put trade here
+                // Send message to Event Hub
+                await eventHubClient.SendAsync(new EventData(encodedTrade));
             }
         }
 
         public Task Stop()
         {
-            // TODO: Probably need to replace this line
             return Task.CompletedTask;
         }
     }
