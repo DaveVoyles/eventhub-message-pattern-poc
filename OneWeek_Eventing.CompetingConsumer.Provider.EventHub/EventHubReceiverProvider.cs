@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Azure.EventHubs;
+using Microsoft.Azure.EventHubs.Processor;
 using OneWeek_Eventing.CompetingConsumer.Entities;
 using OneWeek_Eventing.CompetingConsumer.Interfaces;
 
@@ -25,6 +26,7 @@ namespace OneWeek_Eventing.CompetingConsumer.Provider.EventHub
         {
             _instrument = instrument;
 
+            // Connect to event hub
             var connectionStringBuilder = new EventHubsConnectionStringBuilder(EventHubConnectionString)
             {
                 EntityPath = EventHubName
@@ -35,11 +37,6 @@ namespace OneWeek_Eventing.CompetingConsumer.Provider.EventHub
         }
 
         public event EventHandler<Trade> OnTradeReceived;
-
-        public Task Start(string instrument, bool usePartitions, int partitionIndex = -1, int partitionCount = -1)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task Stop()
         {
