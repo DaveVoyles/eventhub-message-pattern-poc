@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using OneWeek_Eventing.CompetingConsumer.Interfaces;
 using OneWeek_Eventing.CompetingConsumer.Provider.Redis;
-
+using OneWeek_Eventing.CompetingConsumer.Provider.EventHub;
 
 namespace OneWeek_Eventing.CompetingConsumer.Web
 {
@@ -21,8 +21,8 @@ namespace OneWeek_Eventing.CompetingConsumer.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddTransient(typeof(ISenderProvider, typeof)()))
-            services.AddTransient(typeof(ISenderProvider), typeof(RedisSenderProvider));
+            services.AddTransient(typeof(ISenderProvider),   typeof(EventHubSenderProvider));
+            services.AddTransient(typeof(ISenderProvider),   typeof(RedisSenderProvider));
             services.AddTransient(typeof(IReceiverProvider), typeof(RedisReceiverProvider));
             services.AddControllers();
         }
