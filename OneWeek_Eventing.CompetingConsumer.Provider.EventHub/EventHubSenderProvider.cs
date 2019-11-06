@@ -8,7 +8,7 @@ using System.Text;
 
 namespace OneWeek_Eventing.CompetingConsumer.Provider.EventHub
 {
-    public class EvenHubSenderProvider : ISenderProvider
+    public class EventHubSenderProvider : ISenderProvider
     {
         private static EventHubClient eventHubClient;
         private const string EventHubConnectionString = "Endpoint=sb://dv-eventhub.servicebus.windows.net/;SharedAccessKeyName=manage-policy;SharedAccessKey=2Ryi+hFlavlPN3aEir0YsEEBhuCgtD7+kXnvvIs1VEw=;EntityPath=myeventhub";
