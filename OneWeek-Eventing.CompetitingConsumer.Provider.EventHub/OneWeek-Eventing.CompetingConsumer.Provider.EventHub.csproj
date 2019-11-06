@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>OneWeek_Eventing.CompetitingConsumer.Provider.EventHub</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.EventHubs" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OneWeek-Eventing.CompetingConsumer.Entities\OneWeek-Eventing.CompetingConsumer.Entities.csproj" />
+    <ProjectReference Include="..\OneWeek-Eventing.CompetingConsumer.Interfaces\OneWeek-Eventing.CompetingConsumer.Interfaces.csproj" />
+  </ItemGroup>
+
+</Project>
