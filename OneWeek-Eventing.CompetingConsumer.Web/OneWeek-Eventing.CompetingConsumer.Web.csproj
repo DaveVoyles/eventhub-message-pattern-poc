@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -27,6 +27,7 @@
     <ProjectReference Include="..\OneWeek-Eventing.CompetingConsumer.Entities\OneWeek-Eventing.CompetingConsumer.Entities.csproj" />
     <ProjectReference Include="..\OneWeek-Eventing.CompetingConsumer.Interfaces\OneWeek-Eventing.CompetingConsumer.Interfaces.csproj" />
     <ProjectReference Include="..\OneWeek-Eventing.CompetingConsumer.Provider.Redis\OneWeek-Eventing.CompetingConsumer.Provider.Redis.csproj" />
+    <ProjectReference Include="..\OneWeek-Eventing.CompetingConsumer.Provider.EventHub\OneWeek-Eventing.CompetingConsumer.Provider.EventHub.csproj" />
   </ItemGroup>
 
 </Project>
