@@ -44,8 +44,9 @@ namespace OneWeek_Eventing.CompetingConsumer.Provider.EventHub
                 var tradeAsJson    = JsonConvert.SerializeObject(trade);
                 var encodedTrade   = Encoding.UTF8.GetBytes(tradeAsJson);
 
-                // Send message to Event Hub
-                await eventHubClient.SendAsync(new EventData(encodedTrade));
+                // Send message to Event Hub. Use trade.Instrument as the index to track for ordering.
+                // All trades with the same instrument will be stored in the same partition in the Event Hub
+                await eventHubClient.SendAsync(new EventData(encodedTrade), trade.Instrument);
             }
         }
 

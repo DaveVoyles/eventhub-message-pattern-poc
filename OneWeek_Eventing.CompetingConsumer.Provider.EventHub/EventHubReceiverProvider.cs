@@ -49,7 +49,7 @@ namespace OneWeek_Eventing.CompetingConsumer.Provider.EventHub
             await eventProcessorHost.RegisterEventProcessorAsync<EventHubProcessor>();
 
             // Disposes of the Event Processor Host
-            await eventProcessorHost.UnregisterEventProcessorAsync();
+            //await eventProcessorHost.UnregisterEventProcessorAsync();
         }
 
         // Trade events
