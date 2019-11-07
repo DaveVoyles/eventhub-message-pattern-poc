@@ -17,6 +17,7 @@
     <ProjectReference Include="..\OneWeek-Eventing.Common.Providers.Redis\OneWeek-Eventing.Common.Providers.Redis.csproj" />
     <ProjectReference Include="..\OneWeek-Eventing.Common\OneWeek-Eventing.Common.csproj" />
     <ProjectReference Include="..\OneWeek-Eventing.CompetingConsumer.Interfaces\OneWeek-Eventing.CompetingConsumer.Interfaces.csproj" />
+    <ProjectReference Include="..\OneWeek_Eventing.CompetingConsumer.Provider.EventHub\OneWeek_Eventing.CompetingConsumer.Provider.EventHub.csproj" />
   </ItemGroup>
 
 </Project>

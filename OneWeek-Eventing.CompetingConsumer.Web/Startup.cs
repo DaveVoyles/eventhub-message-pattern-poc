@@ -22,10 +22,9 @@ namespace OneWeek_Eventing.CompetingConsumer.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient(typeof(ISenderProvider),   typeof(EventHubSenderProvider));
-            services.AddTransient(typeof(ISenderProvider),   typeof(RedisSenderProvider));
-
-            services.AddTransient(typeof(IReceiverProvider), typeof(RedisReceiverProvider));
             services.AddTransient(typeof(IReceiverProvider), typeof(EventHubReceiverProvider));
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

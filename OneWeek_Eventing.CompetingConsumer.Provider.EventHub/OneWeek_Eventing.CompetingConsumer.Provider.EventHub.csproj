@@ -6,9 +6,11 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.EventHubs" Version="4.1.0" />
+    <PackageReference Include="Microsoft.Azure.EventHubs.Processor" Version="4.1.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OneWeek-Eventing.Common\OneWeek-Eventing.Common.csproj" />
     <ProjectReference Include="..\OneWeek-Eventing.CompetingConsumer.Entities\OneWeek-Eventing.CompetingConsumer.Entities.csproj" />
     <ProjectReference Include="..\OneWeek-Eventing.CompetingConsumer.Interfaces\OneWeek-Eventing.CompetingConsumer.Interfaces.csproj" />
   </ItemGroup>
