@@ -28,11 +28,11 @@ Set the connection string to the one you use in the event hub namespace not the 
 
 ### Setup
 1. Create an [Event Hub Namespace & Event Hub][1] in Azure
-		a. Create at least two consumer groups in the event hub
-			i. $Default is used by the web app
-			ii. The second group is used by Service Bus Explorer to monitor/debug the event hub
+   * Create at least two consumer groups in the event hub
+       *  $Default is used by the web app
+       *  The second group is used by Service Bus Explorer to monitor/debug the event hub
 2. In Azure portal, add an SAS policy to the event hub with Manage permissions
-		a. Copy your primary key & connection string-primary key
+   * Copy your primary key & connection string-primary key
 3. Create a storage account for Event Processor Host
 4. Run the OneWeek-Eventing.CompetitingConsumer.Web project
 5. Run the Postman scripts below
@@ -41,8 +41,8 @@ Set the connection string to the one you use in the event hub namespace not the 
 ## Configure Postman Scripts
 1. Using [Postman](https://www.getpostman.com/downloads/), load the *Event Hub Message PoC.postman_collection.json* file
 2. Run scripts in this order:
-  a. Generate Updates File
-  b. Start Receiver
-  c. Start Sender
+  * Generate Updates File
+  * Start Receiver
+  * Start Sender
   
 You can then monitor their progress with Service Bus Explorer, or by running the *Get Sender Status* and *Get Receiver Status* Postman scripts. 
