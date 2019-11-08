@@ -10,13 +10,13 @@ namespace OneWeek_Eventing.CompetingConsumer.Provider.EventHub
     public class EventHubReceiverProvider : IReceiverProvider
     {
         // Event Hub connections
-        private const string EventHubConnectionString = "Endpoint=sb://dv-eventhub.servicebus.windows.net/;SharedAccessKeyName=manage-policy;SharedAccessKey=2Ryi+hFlavlPN3aEir0YsEEBhuCgtD7+kXnvvIs1VEw=;EntityPath=myeventhub";
-        private const string EventHubName             = "myeventhub";
+        private const string EventHubConnectionString = "";
+        private const string EventHubName             = "";
 
         // Storage
-        private const string StorageContainerName              = "hubcontainer";
-        private const string StorageAccountName                = "dveventhub";
-        private const string StorageAccountKey                 = "6XY4vaNFeafilm1n5rU4toc1a6Y4IlqfMRoWuMz1ESpTQjM8a2A5El2NEjKXNPEE87qUbs+y69V9A4uM+/YR9g==";
+        private const string StorageContainerName              = "";
+        private const string StorageAccountName                = "";
+        private const string StorageAccountKey                 = "";
         private static readonly string StorageConnectionString = string.Format("DefaultEndpointsProtocol=https;AccountName={0};AccountKey={1}", StorageAccountName, StorageAccountKey);
 
         private EventProcessorHost eventProcessorHost;
@@ -45,7 +45,7 @@ namespace OneWeek_Eventing.CompetingConsumer.Provider.EventHub
              * Registering instructs the Event Hubs service to expect that the consumer app consumes
              * events from some of its partitions, and to invoke the IEventProcessor implementation 
              * code whenever it pushes events to consume. */
-            await eventProcessorHost.RegisterEventProcessorAsync<EventHubProcessor>();
+            await eventProcessorHost.RegisterEventProcessorAsync<EventHubProcessor>();      
         }
 
         // Trade events, invoked when a trade is received

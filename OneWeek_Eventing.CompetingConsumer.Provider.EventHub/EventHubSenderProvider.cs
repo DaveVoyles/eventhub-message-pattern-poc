@@ -12,8 +12,8 @@ namespace OneWeek_Eventing.CompetingConsumer.Provider.EventHub
     {
         // Event Hub connections
         private static EventHubClient eventHubClient;
-        private const string EventHubConnectionString = "Endpoint=sb://dv-eventhub.servicebus.windows.net/;SharedAccessKeyName=manage-policy;SharedAccessKey=2Ryi+hFlavlPN3aEir0YsEEBhuCgtD7+kXnvvIs1VEw=;EntityPath=myeventhub";
-        private const string EventHubName             = "myeventhub";
+        private const string EventHubConnectionString = "";
+        private const string EventHubName             = "";
 
         // Vars specific to the trade
         private string _instrument;
