@@ -46,5 +46,3 @@ Set the connection string to the one you use in the event hub namespace not the 
   * Start Sender
   
 You can then monitor their progress with Service Bus Explorer, or by running the *Get Sender Status* and *Get Receiver Status* Postman scripts. 
-
-## remove me
